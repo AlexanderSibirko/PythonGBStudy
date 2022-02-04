@@ -11,7 +11,6 @@ def number_list (N):
             l_result.append(l_result[i-1-1]*i)
     return l_result
 
-
 print(number_list(4))
 print(number_list(5))
 print(number_list(6))

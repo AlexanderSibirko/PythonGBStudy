@@ -13,7 +13,7 @@ def calc_digits(number):
         number //= 10
     return int(sum)
 
-def calc_digits2(number):
+def calc_digits_as_str(number):
     sum = 0
     for i in str(number):
         if i.isdigit():
@@ -23,9 +23,9 @@ def calc_digits2(number):
 number = math.sqrt(2)
 print(number)
 print(calc_digits(number))
-print(calc_digits2(number))
+print(calc_digits_as_str(number))
 
 number = math.pi
 print(number)
 print(calc_digits(number))
-print(calc_digits2(number))
+print(calc_digits_as_str(number))

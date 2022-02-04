@@ -16,4 +16,9 @@ def sum_list(list_):
 print(specific_list(50))
 
 print(sum_list(specific_list(50)))
+
+f = lambda x: ((1+1/x)**x)
+list_ = [f(x) for x in range(1,51)]
+print(list_)
+print(sum(list_))
         
