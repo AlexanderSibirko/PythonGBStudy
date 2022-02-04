@@ -22,3 +22,6 @@ print(get_range(dot1, dot2))
 dot1 = [10,10]
 dot2 = [0,0]
 print(get_range(dot1, dot2))
+
+# есть готовая функция dist !
+print(math.dist(dot1, dot2))

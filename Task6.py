@@ -7,3 +7,7 @@ def weekday_name(day_number_value):
 
 for i in range(1,8):
     print(f'{i} = {weekday_name(i)}')
+
+# list_ = [weekday_name(x) for x in range(1,8)]
+# print(weekday_name(x) for x in range(1,8))
+# print(list_)

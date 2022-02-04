@@ -28,5 +28,22 @@ def create_predicats(predicats_amount):
     return tuple(result)
             
 preds = create_predicats(3)
+
+
 print(preds)
 print(if_its_true((preds)))
+
+def if_its_true_zip(predicats_zip):
+    for preds in predicats_zip:
+        x = preds[0]
+        y = preds[1]
+        z = preds[2]
+        if (~(x | y | z) == ~x & ~y & ~z):
+            continue
+        else:
+            return False
+    return True    
+ziped = list(zip(preds[0],preds[1],preds[2]))
+
+print(ziped)
+print(if_its_true_zip(ziped))
