@@ -12,7 +12,11 @@ print(a, b)
 def AorB_isPow(a, b):
     return (a == b**2 or b == a**2)
 
+AorB_isPow_lambda = lambda a,b : a == b**2 or b == a**2
+
 print(AorB_isPow(a, b))
+
+print(AorB_isPow_lambda(a, b))
 
 
 
