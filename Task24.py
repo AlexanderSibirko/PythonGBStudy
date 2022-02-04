@@ -3,20 +3,12 @@
 
 list_ = [1.1, 1.2, 3.1, 5, 10.01]
 
-def new_list (list_):
-    fractions_list = []
-    for i in list_:
-        fractions_list.append(str(i).split(sep='.'))
-    return fractions_list
+new_list = [round(x % 1,8) for x in list_ if x%1 > 0]
 
-num = '10.002'
-print(num)
-num =float(num)
-print(num)
-
-a = 1.2
-a = 1.2 - 1.0
-print(a)
+min_in_list = lambda x: min(x)
+max_in_list = lambda x: max(x)
+sub = lambda x,y: x-y
 
 print(list_)
-print(new_list(list_))
+print(new_list)
+print(sub(max_in_list(new_list), min_in_list(new_list)))
