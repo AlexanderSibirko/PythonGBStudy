@@ -1,13 +1,9 @@
 from telegram import Update, InlineKeyboardButton, InlineKeyboardMarkup
 from telegram.ext import Updater, CommandHandler, CallbackContext, CallbackQueryHandler
 import CrossAndCircleModel
-
+from PlayersHandler import *
 # context.bot.send_message(update.effective_user.id,'Registered')
 
-# list = [telegram_id, telegram_id...]
-players = []
-# players_data = {'telegram_id': {'Name': string, 'status': integer, 'game_idx': integer}
-players_data = ({})
 
 def start(update: Update, context: CallbackContext) -> None:
     update.message.reply_text(f'type /help to get possible commands')
@@ -17,31 +13,19 @@ def hello(update: Update, context: CallbackContext) -> None:
 
 def help(update: Update, context: CallbackContext) -> None:
     help_message = '''Commands:
-    /help - list possible commands 
-    /hello - sends hello to you
-    /register - to register to Cross and Zeros game\n
-    '''
+/help - list possible commands 
+/hello - sends hello to you
+/register - to register to Cross and Zeros game\n
+'''
     if update.effective_user.id in players:
         help_message += '''/exit - unregister from Cross and Zeros game
-    /list - show players registered to Cross and Zeros game
-    '''
+/list - show players registered to Cross and Zeros game
+/play - inform bot that you are ready to play
+'''
     update.message.reply_text(help_message)
 
 
-def add_player(user_id, user_name):
-    players.append(user_id)
-    players_data[user_id] = {'Name': user_name, 'status': 0}
 
-def remove_player(user_id):
-    if user_id in players:
-        if players_data[user_id]['status'] == 0:
-            players.remove(user_id)
-            return True # player was removed
-        else:
-            # ToDo: if status = 1, inform opponent have left the game
-            players.remove(user_id)
-            return True # player was removed
-    return False # player wasn't removed
 
 def registergame(update: Update, context: CallbackContext) -> None:
     add_player(update.effective_user.id, update.effective_user.name)
@@ -64,14 +48,20 @@ def playgame(update: Update, context: CallbackContext) -> None:
     [InlineKeyboardButton(" ", callback_data='3'),InlineKeyboardButton(" ", callback_data='4'),InlineKeyboardButton(" ", callback_data='5')],
     [InlineKeyboardButton(" ", callback_data='6'),InlineKeyboardButton(" ", callback_data='7'),InlineKeyboardButton(" ", callback_data='8')]]
     reply_markup = InlineKeyboardMarkup(keyboard)
-    update.message.reply_text('Please choose:', reply_markup=reply_markup)
+    botanswer = update.message.reply_text('Please choose:', reply_markup=reply_markup)
+    botanswer.chat_id 
+    botanswer.message_id
     
 
     ### понять код
 def button(update: Update, context: CallbackContext) -> None:
     user_id = update.effective_user.id
     """Parses the CallbackQuery and updates the message text."""
+    this_chat_id = query.message.chat_id
+    this_message = query.message.message_id
+    
     query = update.callback_query
+    context.bot.edit_message_text(chat_id = this_chat_id, message_id = this_message, text = 'gotcha')
     # CallbackQueries need to be answered, even if no notification to the user is needed
     # Some clients may have trouble otherwise. See https://core.telegram.org/bots/api#callbackquery
     query.answer()
@@ -83,7 +73,7 @@ def button(update: Update, context: CallbackContext) -> None:
         message_text = "There is already X or O choice another square:"
     # создание кнопок игрового поля
     reply_markup = InlineKeyboardMarkup(create_response_table(game_idx))
-    query.edit_message_text(text=message_text, reply_markup=reply_markup)
+    # query.edit_message_text(text=message_text, reply_markup=reply_markup)
     
 def create_response_table(game_idx):
     table = CrossAndCircleModel.get_table(game_idx)
